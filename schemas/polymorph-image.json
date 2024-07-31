@@ -1,0 +1,93 @@
+{
+	"type": "object",
+	"properties":
+	{
+		"image":
+		{
+			"type": "string",
+			"description": "The binary image data."
+		},
+		"imageUrl":
+		{
+			"type": "string",
+			"format": "uri",
+			"description": "The image URL."
+		},
+		"manipulations":
+		{
+			"type": "array",
+			"items":
+			{
+				"type": "object",
+				"properties":
+				{
+					"operation":
+					{
+						"type": "string",
+						"enum": ["addAlphaChannel", "affineTransform", "applyThreshold", "blurImage", "booleanTransform", "changeColorspace", "claheImage", "convolveImage", "convertImage", "extractChannel", "flattenImage", "flipImage", "gammaCorrect", "grayscaleImage", "linearAdjustment", "medianFilter", "modulateImage", "normalizeImage", "pipelineColorspace", "produceNegative", "recombineImage", "removeAlphaChannel", "resizeImage", "rotateImage", "sharpenImage", "tintImage", "unflattenImage"],
+						"description": "The image operation to perform."
+					},
+					"options":
+					{
+						"type": "object",
+						"description": "Settings for the image operation. See https://sharp.pixelplumbing.com for more information."
+					}
+				}
+			}
+		},
+		"rendering":
+		{
+			"type": "object",
+			"properties":
+			{
+				"background":
+				{
+					"type": "string",
+					"default": "#fff",
+					"pattern": "#[0-9a-fA-F]{3,6}",
+					"description": "The background color; used for image fit, rotation, and some other manipulations."
+				},
+				"fit":
+				{
+					"type": "string",
+					"default": "contain",
+					"enum": ["contain", "cover", "fill", "inside", "outside"],
+					"description": "The image fit; used when an image size doesn't match the given dimensions. Based on CSS properties."
+				},
+				"height":
+				{
+					"type": "number",
+					"minimum": 200,
+					"description": "The image height for non-SVG images."
+				},
+				"format":
+				{
+					"type": "string",
+					"default": "avif",
+					"pattern": "^(avif|gif|jpeg|jpg|png|svg|tif|tiff|webp){1}(;base64)*$",
+					"description": "The image format. Optionally supports base64 encoding by adding ;base64 to the end."
+				},
+				"kernel":
+				{
+					"type": "string",
+					"default": "lanczos3",
+					"enum": ["cubic", "lanczos2", "lanczos3", "mitchell", "nearest"],
+					"description": "The algorithm to use when resizing images."
+				},
+				"position":
+				{
+					"type": "string",
+					"default": "centre",
+					"enum": ["bottom", "bottom left", "center", "centre", "east", "left", "left top", "north", "northeast", "northwest", "right", "right bottom", "right top", "south", "southeast", "top", "west"],
+					"description": "The image position; used when an image size doesn't match the given dimensions."
+				},
+				"width":
+				{
+					"type": "number",
+					"minimum": 200,
+					"description": "The image height for non-SVG images."
+				}
+			}
+		}
+	}
+}
